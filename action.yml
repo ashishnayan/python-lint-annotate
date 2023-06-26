@@ -97,10 +97,10 @@ runs:
         echo "path_sep=" >> $GITHUB_ENV
       shell: pwsh
 
-    - name: Posix install dependencies
-      if: ${{ runner.os != 'Windows' }}
-      run:  pip install -r ${{ github.action_path }}/requirements.txt
-      shell: bash
+    # - name: Posix install dependencies
+    #   if: ${{ runner.os != 'Windows' }}
+    #   run:  pip install -r ${{ github.action_path }}/requirements.txt
+      # shell: bash
 
     - name: Lint on Windows
       if: ${{ runner.os == 'Windows' }}
