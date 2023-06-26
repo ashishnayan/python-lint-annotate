@@ -90,12 +90,12 @@ runs:
     - run: python --version
       shell: bash
 
-    - name: Windows install dependencies
-      if: ${{ runner.os == 'Windows' }}
-      run:  |
-        pip install -r ${{ github.action_path }}\requirements.txt
-        echo "path_sep=" >> $GITHUB_ENV
-      shell: pwsh
+    # - name: Windows install dependencies
+    #   if: ${{ runner.os == 'Windows' }}
+    #   run:  |
+    #     pip install -r ${{ github.action_path }}\requirements.txt
+        # echo "path_sep=" >> $GITHUB_ENV
+      # shell: pwsh
 
     # - name: Posix install dependencies
     #   if: ${{ runner.os != 'Windows' }}
