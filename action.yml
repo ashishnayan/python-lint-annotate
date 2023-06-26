@@ -81,26 +81,26 @@ runs:
   using: "composite"
   steps:
     - name: Setup python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: ${{ inputs.python-version }}
         architecture: x64
-        cache: pip
+        cache: poetry
     
     - run: python --version
       shell: bash
 
-    # - name: Windows install dependencies
-    #   if: ${{ runner.os == 'Windows' }}
-    #   run:  |
-    #     pip install -r ${{ github.action_path }}\requirements.txt
-        # echo "path_sep=" >> $GITHUB_ENV
-      # shell: pwsh
+    - name: Windows install dependencies
+      if: ${{ runner.os == 'Windows' }}
+      run:  |
+        pip install -r ${{ github.action_path }}\requirements.txt
+        echo "path_sep=" >> $GITHUB_ENV
+      shell: pwsh
 
-    # - name: Posix install dependencies
-    #   if: ${{ runner.os != 'Windows' }}
-    #   run:  pip install -r ${{ github.action_path }}/requirements.txt
-      # shell: bash
+    - name: Posix install dependencies
+      if: ${{ runner.os != 'Windows' }}
+      run:  pip install -r ${{ github.action_path }}/requirements.txt
+      shell: bash
 
     - name: Lint on Windows
       if: ${{ runner.os == 'Windows' }}
