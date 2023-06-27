@@ -127,7 +127,7 @@ runs:
         '${{ inputs.extra-isort-options }}'
         '${{ inputs.extra-vulture-options }}'
         '${{ inputs.extra-pydocstyle-options }}'
-        ${{ inputs.command }}
+        '${{ inputs.command }}'
       shell: pwsh
 
     - name: Lint on Linux
@@ -151,5 +151,5 @@ runs:
         '${{ inputs.extra-isort-options }}'
         '${{ inputs.extra-vulture-options }}'
         '${{ inputs.extra-pydocstyle-options }}'
-        ${{ inputs.command }}
+        '${{ inputs.command }}'
       shell: bash
