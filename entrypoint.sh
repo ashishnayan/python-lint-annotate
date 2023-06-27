@@ -35,6 +35,7 @@ echo extra-mypy-options:        ${14}
 echo extra-isort-options:       ${15}
 echo extra-vulture-options:     ${16}
 echo extra-pydocstyle-options:  ${17}
+echo command:                   ${18}
 
 # actions path has the copy of this actions repo
 echo $RUNNER_OS
@@ -58,7 +59,7 @@ if [ "$2" = true ] ; then
 
     echo Running: pylint ${10} $1
 
-    pylint --output-format="colorized" ${10} $1
+    ${18} pylint --output-format="colorized" ${10} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -73,7 +74,7 @@ if [ "$3" = true ] ; then
 
     echo Running: pycodestyle ${11} $1
 
-    pycodestyle ${11} $1
+    ${18} pycodestyle ${11} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -88,7 +89,7 @@ if [ "$4" = true ] ; then
 
     echo Running: flake8 ${12} $1
 
-    flake8 ${12} $1
+    ${18} flake8 ${12} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -103,7 +104,7 @@ if [ "$5" = true ] ; then
 
     echo Running: black --check ${13} $1
 
-    black --check ${13} $1
+    ${18} black --check ${13} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -118,7 +119,7 @@ if [ "$6" = true ] ; then
 
     echo Running: mypy --install-types --non-interactive --ignore-missing-imports --follow-imports=silent --show-column-numbers ${14} $1
 
-    mypy \
+    ${18} mypy \
       --install-types --non-interactive \
       --ignore-missing-imports \
       --follow-imports=silent \
@@ -137,7 +138,7 @@ if [ "$7" = true ] ; then
 
     echo Running: isort ${15} $1 -c --diff
 
-    isort ${15} $1 -c --diff
+    ${18} isort ${15} $1 -c --diff
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -152,7 +153,7 @@ if [ "$8" = true ] ; then
 
     echo Running: vulture ${16} $1
 
-    vulture ${16} $1
+    ${18} vulture ${16} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
@@ -167,7 +168,7 @@ if [ "$9" = true ] ; then
 
     echo Running: pydocstyle ${17} $1
 
-    pydocstyle ${17} $1
+    ${18} pydocstyle ${17} $1
     exit_code=$?
 
     if [ "$exit_code" = "0" ]; then
