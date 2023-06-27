@@ -8,38 +8,42 @@ inputs:
     description: "A list of all paths to test"
     required: false
     default: "."
+  command:
+    description: "Initial command specially for poetry"
+    required: false
+    default: ""
   use-pylint:
     description: "Use Pylint"
     required: false
-    default: true
+    default: false
   use-pycodestyle:
     description: "Use pycodestyle"
     required: false
-    default: true
+    default: false
   use-flake8:
     description: "Use Flake8"
     required: false
-    default: true
+    default: false
   use-black:
     description: "Use Black"
     required: false
-    default: true
+    default: false
   use-mypy:
     description: "Use mypy"
     required: false
-    default: true
+    default: false
   use-isort:
     description: "Use isort"
     required: false
-    default: true
+    default: false
   use-vulture:
     description: "Use vulture"
     required: false
-    default: true
+    default: false
   use-pydocstyle:
     description: "Use pydocstyle"
     required: false
-    default: true
+    default: false
   extra-pylint-options:
     description: "Extra options: pylint $(extra-pylint-options) $(python-root-list)"
     required: false
@@ -85,22 +89,22 @@ runs:
       with:
         python-version: ${{ inputs.python-version }}
         architecture: x64
-        cache: poetry
+        cache: ${{ inputs.cache-type }}
     
     - run: python --version
       shell: bash
 
-    - name: Windows install dependencies
-      if: ${{ runner.os == 'Windows' }}
-      run:  |
-        pip install -r ${{ github.action_path }}\requirements.txt
-        echo "path_sep=" >> $GITHUB_ENV
-      shell: pwsh
-
-    - name: Posix install dependencies
-      if: ${{ runner.os != 'Windows' }}
-      run:  pip install -r ${{ github.action_path }}/requirements.txt
-      shell: bash
+    # - name: Windows install dependencies
+    #   if: ${{ runner.os == 'Windows' }}
+    #   run:  |
+    #     pip install -r ${{ github.action_path }}\requirements.txt
+    #     echo "path_sep=" >> $GITHUB_ENV
+    #   shell: pwsh
+    #
+    # - name: Posix install dependencies
+    #   if: ${{ runner.os != 'Windows' }}
+    #   run:  pip install -r ${{ github.action_path }}/requirements.txt
+    #   shell: bash
 
     - name: Lint on Windows
       if: ${{ runner.os == 'Windows' }}
@@ -123,6 +127,7 @@ runs:
         '${{ inputs.extra-isort-options }}'
         '${{ inputs.extra-vulture-options }}'
         '${{ inputs.extra-pydocstyle-options }}'
+        ${{ inputs.command }}
       shell: pwsh
 
     - name: Lint on Linux
@@ -146,4 +151,5 @@ runs:
         '${{ inputs.extra-isort-options }}'
         '${{ inputs.extra-vulture-options }}'
         '${{ inputs.extra-pydocstyle-options }}'
+        ${{ inputs.command }}
       shell: bash
