@@ -80,19 +80,23 @@ inputs:
     description: "Set desired python version with this keyword"
     required: false
     default: "3.8"
+  cache-type:
+    description: "Set cache for setup python"
+    required: true
+    default: "poetry"
 
 runs:
   using: "composite"
   steps:
-    # - name: Setup python
-    #   uses: actions/setup-python@v4
-    #   with:
-    #     python-version: ${{ inputs.python-version }}
-    #     architecture: x64
-    #     cache: ${{ inputs.cache-type }}
-    # 
-    # - run: python --version
-    #   shell: bash
+    - name: Setup python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python-version }}
+        architecture: x64
+        cache: ${{ inputs.cache-type }}
+
+    - run: python --version
+      shell: bash
 
     # - name: Windows install dependencies
     #   if: ${{ runner.os == 'Windows' }}
