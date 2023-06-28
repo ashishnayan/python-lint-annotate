@@ -80,6 +80,10 @@ inputs:
     description: "Set desired python version with this keyword"
     required: false
     default: "3.8"
+  cache-type:
+    description: "Set cache for setup python"
+    required: true
+    default: "poetry"
 
 runs:
   using: "composite"
@@ -90,7 +94,7 @@ runs:
         python-version: ${{ inputs.python-version }}
         architecture: x64
         cache: ${{ inputs.cache-type }}
-    
+
     - run: python --version
       shell: bash
 
@@ -127,7 +131,7 @@ runs:
         '${{ inputs.extra-isort-options }}'
         '${{ inputs.extra-vulture-options }}'
         '${{ inputs.extra-pydocstyle-options }}'
-        ${{ inputs.command }}
+        '${{ inputs.command }}'
       shell: pwsh
 
     - name: Lint on Linux
@@ -151,5 +155,5 @@ runs:
         '${{ inputs.extra-isort-options }}'
         '${{ inputs.extra-vulture-options }}'
         '${{ inputs.extra-pydocstyle-options }}'
-        ${{ inputs.command }}
+        '${{ inputs.command }}'
       shell: bash

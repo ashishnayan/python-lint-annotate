@@ -57,7 +57,7 @@ export TERM=xterm
 
 if [ "$2" = true ] ; then
 
-    echo Running: pylint ${10} $1
+    echo Running: ${18} pylint ${10} $1
 
     ${18} pylint --output-format="colorized" ${10} $1
     exit_code=$?
@@ -72,7 +72,7 @@ fi
 
 if [ "$3" = true ] ; then
 
-    echo Running: pycodestyle ${11} $1
+    echo Running: ${18} pycodestyle ${11} $1
 
     ${18} pycodestyle ${11} $1
     exit_code=$?
@@ -87,7 +87,7 @@ fi
 
 if [ "$4" = true ] ; then
 
-    echo Running: flake8 ${12} $1
+    echo Running: ${18} flake8 ${12} $1
 
     ${18} flake8 ${12} $1
     exit_code=$?
@@ -102,7 +102,7 @@ fi
 
 if [ "$5" = true ] ; then
 
-    echo Running: black --check ${13} $1
+    echo Running: ${18} black --check ${13} $1
 
     ${18} black --check ${13} $1
     exit_code=$?
@@ -117,7 +117,7 @@ fi
 
 if [ "$6" = true ] ; then
 
-    echo Running: mypy --install-types --non-interactive --ignore-missing-imports --follow-imports=silent --show-column-numbers ${14} $1
+    echo Running: ${18} mypy --install-types --non-interactive --ignore-missing-imports --follow-imports=silent --show-column-numbers ${14} $1
 
     ${18} mypy \
       --install-types --non-interactive \
@@ -136,7 +136,7 @@ fi
 
 if [ "$7" = true ] ; then
 
-    echo Running: isort ${15} $1 -c --diff
+    echo Running: ${18} isort ${15} $1 -c --diff
 
     ${18} isort ${15} $1 -c --diff
     exit_code=$?
@@ -151,7 +151,7 @@ fi
 
 if [ "$8" = true ] ; then
 
-    echo Running: vulture ${16} $1
+    echo Running: ${18} vulture ${16} $1
 
     ${18} vulture ${16} $1
     exit_code=$?
@@ -166,7 +166,7 @@ fi
 
 if [ "$9" = true ] ; then
 
-    echo Running: pydocstyle ${17} $1
+    echo Running: ${18} pydocstyle ${17} $1
 
     ${18} pydocstyle ${17} $1
     exit_code=$?
